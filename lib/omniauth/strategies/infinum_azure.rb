@@ -4,8 +4,10 @@ module OmniAuth
   module Strategies
     class InfinumAzure < OmniAuth::Strategies::OAuth2
       option :name, 'infinum_azure'
-      option :policy, 'B2C_1_sign_in'
-      option :scope, 'openid'
+
+      option :client_options, tenant: 'infinumtest'
+      option :client_options, policy: 'B2C_1_sign_in'
+      option :client_options, scope: 'openid'
 
       def base_azure_url
         "https://#{options.tenant}.b2clogin.com/#{options.tenant}.onmicrosoft.com/#{options.policy}/oauth2/v2.0"
