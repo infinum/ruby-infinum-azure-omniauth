@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    omniauth-infinum_azure (0.1.2)
+    omniauth-infinum_azure (0.1.3)
       omniauth-oauth2
 
 GEM
