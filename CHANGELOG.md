@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+## [0.1.5] - 2023-03-14
+
+- Read tenant from client options
+
 ## [0.1.4] - 2023-03-14
 
 - Moving options to client options
