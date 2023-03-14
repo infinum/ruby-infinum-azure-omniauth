@@ -3,7 +3,7 @@
 module OmniAuth
   module Strategies
     class InfinumAzure < OmniAuth::Strategies::OAuth2
-      option :name, 'azure'
+      option :name, 'infinum_azure'
       option :policy, 'B2C_1_sign_in'
       option :scope, 'openid'
 
