@@ -7,14 +7,6 @@ module OmniAuth
       option :policy, 'B2C_1_sign_in'
       option :scope, 'openid'
 
-      def base_azure_url
-        "https://#{tenant}.b2clogin.com/#{tenant}.onmicrosoft.com/#{options.policy}/oauth2/v2.0"
-      end
-
-      def tenant
-        options.client_options.tenant || 'tenant_not_provided'
-      end
-
       def client
         options.client_options.authorize_url = File.join(base_azure_url, 'authorize')
         options.client_options.token_url = File.join(base_azure_url, 'token')
@@ -22,14 +14,24 @@ module OmniAuth
         super
       end
 
-      def logout_url
-        File.join(base_azure_url, 'logout') + "?post_logout_redirect_uri=#{File.join(full_host, path_prefix, 'logout')}"
+      def base_azure_url
+        raise 'Tenant not provided' if tenant.nil?
+
+        "https://#{tenant}.b2clogin.com/#{tenant}.onmicrosoft.com/#{options.policy}/oauth2/v2.0"
+      end
+
+      def tenant
+        options.client_options.tenant
       end
 
       def other_phase
         return call_app! unless current_path == File.join(path_prefix, name.to_s, 'logout')
 
         redirect(logout_url)
+      end
+
+      def logout_url
+        File.join(base_azure_url, 'logout') + "?post_logout_redirect_uri=#{File.join(full_host, path_prefix, 'logout')}"
       end
 
       uid do
