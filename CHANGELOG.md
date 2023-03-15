@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+## [0.1.6] - 2023-03-15
+
+- Raise error if tenant not provided
+
 ## [0.1.5] - 2023-03-14
 
 - Read tenant from client options
