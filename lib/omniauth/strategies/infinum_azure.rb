@@ -4,7 +4,7 @@ module OmniAuth
   module Strategies
     class InfinumAzure < OmniAuth::Strategies::OAuth2
       option :name, 'infinum_azure'
-      option :policy, 'B2C_1_sign_in'
+      option :policy, 'B2C_1A_SIGNUP_SIGNIN'
       option :scope, 'openid'
 
       def client
