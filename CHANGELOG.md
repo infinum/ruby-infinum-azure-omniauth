@@ -1,5 +1,10 @@
 ## [Unreleased]
 
+## [0.2.0] - 2023-04-04
+
+- Fix issue with Azure payload (emails array changed to email string)
+- Add first_name and last_name to `info`
+
 ## [0.1.7] - 2023-04-04
 
 - Change policy ID to allow signin and signup
