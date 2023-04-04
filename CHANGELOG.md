@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+## [0.1.7] - 2023-04-04
+
+- Change policy ID to allow signin and signup
+
 ## [0.1.6] - 2023-03-15
 
 - Raise error if tenant not provided
