@@ -40,8 +40,10 @@ module OmniAuth
 
       info do
         {
-          email: raw_info['emails'][0],
-          name: raw_info['name']
+          email: raw_info['email'],
+          name: raw_info['name'],
+          first_name: raw_info['given_name'],
+          last_name: raw_info['family_name']
         }
       end
 
