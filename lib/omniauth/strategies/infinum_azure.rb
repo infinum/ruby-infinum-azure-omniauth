@@ -43,7 +43,10 @@ module OmniAuth
           email: raw_info['email'],
           name: raw_info['name'],
           first_name: raw_info['given_name'],
-          last_name: raw_info['family_name']
+          last_name: raw_info['family_name'],
+          avatar_url: raw_info['avatar_url'],
+          deactivated_at: raw_info['deactivated_at'],
+          provider_groups: raw_info['ADD_WHEN_CREATED']
         }
       end
 
