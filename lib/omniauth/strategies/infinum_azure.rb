@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'time'
+
 module OmniAuth
   module Strategies
     class InfinumAzure < OmniAuth::Strategies::OAuth2
@@ -43,7 +45,11 @@ module OmniAuth
           email: raw_info['email'],
           name: raw_info['name'],
           first_name: raw_info['given_name'],
-          last_name: raw_info['family_name']
+          last_name: raw_info['family_name'],
+          provider_groups: raw_info['extension_userGroup'],
+          avatar_url: raw_info['extension_avatarUrl'],
+          deactivated_at: deactivated_at,
+          employee: employee
         }
       end
 
@@ -58,6 +64,16 @@ module OmniAuth
 
       def raw_info
         @raw_info ||= ::JWT.decode(access_token.token, nil, false).first
+      end
+
+      private
+
+      def deactivated_at
+        raw_info['extension_deactivated'] == false ? nil : Time.now.utc
+      end
+
+      def employee
+        raw_info['extension_userGroup'].include?('employees')
       end
     end
   end
