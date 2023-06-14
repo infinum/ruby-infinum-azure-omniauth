@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+## [0.3.0] - 2023-06-14
+
+- Add *provider_groups*, *avatar_url*, *deactivated_at* and *employee* to `#info`
+
 ## [0.2.0] - 2023-04-04
 
 - Fix issue with Azure payload (emails array changed to email string)
