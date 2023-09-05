@@ -1,0 +1,11 @@
+{
+  "keys": [
+    {
+      "kid": "my-kid",
+      "use": "sig",
+      "kty": "RSA",
+      "e": "AQAB",
+      "n": "ouJe8-hr1ybaGaeHGJ6v6L8QKpIm2Nn8xz_W2WzZuk2_B9NFmAiTmbaMDIcn4zoNGxmI3D_Mkw37gegh171_dIamhO4WYTLEzyLX58pMcP0i_43KdYmiPpsgLN6OlIFfiJnEj2htsR-gykyK8XHBR8lRfaHO6vnvaTdd2RHlX6H5c7ycTlP2x8KVSbtxHLapIKqaforiifuVokrlYSIi0o3B7y28SC7gs7-FAJi2PH7LjcUrPBy7Xlh1H0EpxkB6dRtpumBejwFmR-jUHSgmTCypBAC5rlzdydFUlWFEYslJekAu-gNrdOUcrLg3uM1pwB5vkmkpgZ-gWC5bBiMXtQ"
+    }
+  ]
+}

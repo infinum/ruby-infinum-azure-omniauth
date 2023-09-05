@@ -9,71 +9,71 @@ module OmniAuth
       option :policy, 'B2C_1A_SIGNUP_SIGNIN'
       option :scope, 'openid'
 
-      def client
-        options.client_options.authorize_url = File.join(base_azure_url, 'authorize')
-        options.client_options.token_url = File.join(base_azure_url, 'token')
+      def client # rubocop:disable Metrics/AbcSize
+        options.client_options.authorize_url = File.join(azure_oauth_url, 'authorize')
+        options.client_options.token_url = File.join(azure_oauth_url, 'token')
+        options.client_options.jwks_url = File.join(base_azure_url, 'discovery/v2.0/keys')
+        options.client_options.logout_url = File.join(azure_oauth_url, 'logout').concat(
+          "?post_logout_redirect_uri=#{File.join(full_host, path_prefix, 'logout')}"
+        )
 
         super
       end
 
-      def base_azure_url
-        raise 'Tenant not provided' if tenant.nil?
-
-        "https://#{tenant}.b2clogin.com/#{tenant}.onmicrosoft.com/#{options.policy}/oauth2/v2.0"
+      def azure_oauth_url
+        File.join(base_azure_url, 'oauth2/v2.0')
       end
 
-      def tenant
-        options.client_options.tenant
+      def base_azure_url
+        raise 'Tenant not provided' if options.client_options.tenant.nil?
+
+        "https://#{options.client_options.tenant}.b2clogin.com/#{options.client_options.tenant}.onmicrosoft.com/#{options.policy}"
       end
 
       def other_phase
         return call_app! unless current_path == File.join(path_prefix, name.to_s, 'logout')
 
-        redirect(logout_url)
-      end
-
-      def logout_url
-        File.join(base_azure_url, 'logout') + "?post_logout_redirect_uri=#{File.join(full_host, path_prefix, 'logout')}"
+        redirect(client.options[:logout_url])
       end
 
       uid do
-        raw_info['sub']
+        jwt_payload['sub']
       end
 
       info do
         {
-          email: raw_info['email'],
-          name: raw_info['name'],
-          first_name: raw_info['given_name'],
-          last_name: raw_info['family_name'],
-          provider_groups: raw_info['extension_userGroup'],
-          avatar_url: raw_info['extension_avatarUrl'],
+          email: jwt_payload['email'],
+          name: jwt_payload['name'],
+          first_name: jwt_payload['given_name'],
+          last_name: jwt_payload['family_name'],
+          provider_groups: jwt_payload['extension_userGroup'],
+          avatar_url: jwt_payload['extension_avatarUrl'],
           deactivated_at: deactivated_at,
           employee: employee
         }
       end
 
-      def extra
+      extra do
         {
           refresh_token: access_token.refresh_token,
           refresh_token_expires_in: access_token.params[:refresh_token_expires_in],
           params: access_token.params,
-          raw_info: raw_info
+          raw_info: jwt_payload
         }
-      end
-
-      def raw_info
-        @raw_info ||= ::JWT.decode(access_token.token, nil, false).first
       end
 
       private
 
       def deactivated_at
-        raw_info['extension_deactivated'] == false ? nil : Time.now.utc
+        jwt_payload['extension_deactivated'] == false ? nil : Time.now.utc
       end
 
       def employee
-        raw_info['extension_userGroup'].include?('employees')
+        jwt_payload['extension_userGroup'].include?('employees')
+      end
+
+      def jwt_payload
+        @jwt_payload ||= Jwt::Parser.new(access_token.token, client: client).validated_payload
       end
     end
   end

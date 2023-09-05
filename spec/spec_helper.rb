@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
+require 'pry'
 require 'bundler/setup'
 require 'omniauth/infinum_azure'
+require 'omniauth/jwt/parser'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

@@ -7,6 +7,8 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
+    byebug (11.1.3)
+    coderay (1.1.3)
     diff-lcs (1.5.0)
     faraday (2.7.4)
       faraday-net_http (>= 2.0, < 3.1)
@@ -14,6 +16,7 @@ GEM
     faraday-net_http (3.0.2)
     hashie (5.0.0)
     jwt (2.7.0)
+    method_source (1.0.0)
     multi_xml (0.6.0)
     oauth2 (2.0.9)
       faraday (>= 0.17.3, < 3.0)
@@ -29,6 +32,12 @@ GEM
     omniauth-oauth2 (1.8.0)
       oauth2 (>= 1.4, < 3)
       omniauth (~> 2.0)
+    pry (0.14.2)
+      coderay (~> 1.1)
+      method_source (~> 1.0)
+    pry-byebug (3.10.1)
+      byebug (~> 11.0)
+      pry (>= 0.13, < 0.15)
     rack (3.0.4.2)
     rack-protection (3.0.5)
       rack
@@ -58,6 +67,8 @@ PLATFORMS
 DEPENDENCIES
   bundler (~> 2.1)
   omniauth-infinum_azure!
+  pry
+  pry-byebug
   rake (~> 13.0)
   rspec (~> 3.0)
 
