@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+## [0.4.0] - 2023-09-05
+
+- Add JWT signature validation
+
 ## [0.3.0] - 2023-06-14
 
 - Add *provider_groups*, *avatar_url*, *deactivated_at* and *employee* to `#info`
