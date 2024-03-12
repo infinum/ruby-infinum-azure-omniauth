@@ -1,5 +1,10 @@
 ## [Unreleased]
 
+## [1.0.0] - 2024-03-12
+
+**BREAKING CHANGE**
+- Add `domain` client option - prior versions were using a hardcoded part in the domain (b2clogin.com). Version 1 and later will require this to be provided by the client.
+
 ## [0.4.0] - 2023-09-05
 
 - Add JWT signature validation
