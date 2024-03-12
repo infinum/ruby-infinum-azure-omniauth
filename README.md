@@ -33,7 +33,10 @@ config.omniauth(
   :infinum_azure,
   'InfinumAzure_client_id',
   'InfinumAzure_client_secret',
-  client_options: { tenant: 'InfinumAzureTenantName' }
+  client_options: {
+    domain: 'https://login.b2c.com',
+    tenant: 'InfinumAzureTenantName'
+  }
 )
 ```
 

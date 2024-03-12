@@ -24,10 +24,11 @@ module OmniAuth
         File.join(base_azure_url, 'oauth2/v2.0')
       end
 
-      def base_azure_url
+      def base_azure_url # rubocop:disable Metrics/AbcSize
+        raise 'Domain not provided' if options.client_options.domain.nil?
         raise 'Tenant not provided' if options.client_options.tenant.nil?
 
-        "https://#{options.client_options.tenant}.b2clogin.com/#{options.client_options.tenant}.onmicrosoft.com/#{options.policy}"
+        "#{options.client_options.domain}/#{options.client_options.tenant}.onmicrosoft.com/#{options.policy}"
       end
 
       def other_phase
