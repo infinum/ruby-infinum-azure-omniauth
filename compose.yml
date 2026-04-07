@@ -1,0 +1,10 @@
+name: infinum-azure-omniauth
+
+services:
+  runner:
+    build:
+      context: .
+      target: base
+    volumes:
+      - .:/usr/src
+    command: bash
