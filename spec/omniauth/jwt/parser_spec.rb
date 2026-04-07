@@ -16,7 +16,7 @@ RSpec.describe OmniAuth::Jwt::Parser do
     subject(:payload) { described_class.new(token, client: client_mock).validated_payload }
 
     context 'when token is valid' do
-      let(:token) { File.read('spec/support/files/jwt/valid') }
+      let(:token) { File.read('spec/support/files/jwt/valid').strip }
 
       it 'returns a hash containing relevant properties' do
         expect(payload.keys).to include(
@@ -36,7 +36,7 @@ RSpec.describe OmniAuth::Jwt::Parser do
     end
 
     context 'when token is invalid' do
-      let(:token) { File.read('spec/support/files/jwt/invalid') }
+      let(:token) { File.read('spec/support/files/jwt/invalid').strip }
 
       it 'raises JWT::VerificationError' do
         expect { payload }.to raise_error(JWT::VerificationError)
